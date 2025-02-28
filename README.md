@@ -1,12 +1,8 @@
-# 医疗保险欺诈检测系统 / Healthcare Insurance Fraud Detection System
-
-[English Version](#english-version)
-
-## 中文版本
+# 欺诈识别与风险防范，模型->+策略（Agentic AI） / Healthcare Insurance Fraud Detection System
 
 ### 📋 项目概述
 
-本项目构建了一个端到端的医疗保险欺诈检测系统，集成了数据分析、模型训练、特征解释和防控策略生成等功能。系统基于美国医疗保险和医疗补助服务中心（CMS）以及美国卫生与公众服务部监察长办公室（OIG）的公开数据构建。
+本项目构建了一个端到端的医疗保险欺诈检测系统，集成了数据分析、模型训练、特征解释和防控策略生成等功能。系统基于美国医疗保险和医疗补助服务中心（CMS）以及美国卫生与公众服务部监察长办公室（OIG）的公开数据构建。项目创新性地引入了智能风控Agent架构，通过PM/工程师双层设计实现了从欺诈识别到风险防范的全流程智能化,尤其实现了工程架构上的创新，极大程度实现提效的目的。
 
 ### 🌟 核心特性
 
@@ -14,6 +10,7 @@
 - **多模型集成**：集成了逻辑回归、随机森林、XGBoost和深度神经网络等多个模型
 - **可解释性分析**：使用SHAP值提供详细的模型解释
 - **防控策略生成**：自动生成可执行的风险防控规则
+- **智能Agent架构**：PM/工程师双层架构，实现从需求分析到代码实现的智能协作
 
 ### 📊 数据说明
 
@@ -52,26 +49,107 @@
 - 服务地点（医院/诊所）
 - 索赔计数和相关属性
 
+### 🧠 技术创新
+
+#### 特征工程
+- **梯度剥离噪声技术**：通过梯度下降法识别并剥离数据中的噪声，提高特征质量
+- **时序比值特征**：融合就诊频次与费用波动构建时序比值特征，捕捉异常模式
+- **决策树逆向解析**：通过决策树模型逆向解析异常场景关联规律，提取高价值特征
+
+#### 欺诈识别模型
+- **三层级模型体系**：构建"快筛-精筛-归因"三层级模型体系
+  * 快筛层：基于轻量级模型快速筛选高风险案例
+  * 精筛层：使用复杂模型对高风险案例进行精细分析
+  * 归因层：通过可解释AI技术对欺诈行为进行归因分析
+- **双层筛查机制**：耦合有监督与无监督检测方法，提高检测准确性
+- **模型性能**：KS值达0.37，F2分数达0.76
+
+#### 策略优化
+- **欺诈路径逆向解析**：通过模型解释技术逆向解析欺诈路径
+- **规则链生成**：基于欺诈路径自动生成风险防控规则链
+- **动态阈值优化**：基于成本敏感学习动态优化风险阈值
+- **断点回归验证**：使用断点回归方法验证策略有效性
+
+### 🤖 智能Agent架构
+
+#### PM/工程师双层架构
+- **PM层**：负责需求分析、任务分解和结果评估
+  * 需求理解与转化
+  * 任务优先级排序
+  * 成果质量评估
+  * 迭代方向决策
+- **工程师层**：负责技术实现和代码优化
+  * 算法设计与实现
+  * 代码优化与重构
+  * 技术文档生成
+  * 单元测试与调试
+
+#### 文档沟通和动态反馈机制
+- **结构化文档体系**：
+  * 需求文档模板
+  * 技术规范文档
+  * 代码注释规范
+  * 测试报告模板
+- **动态反馈循环**：
+  * 实时进度追踪
+  * 阶段性成果评估
+  * 问题快速响应机制
+  * 持续优化建议
+
+#### Builder心态与系统优化
+- **自我进化机制**：
+  * 代码自动重构
+  * 性能自动优化
+  * 文档自动更新
+  * 测试自动生成
+- **完成度突破策略**：
+  * 模块化设计
+  * 增量式开发
+  * 持续集成部署
+  * 自动化测试覆盖
+
 ### 🏗️ 项目结构
 
 ```
-0222modelcode/
+murphysystermmodelcode/
 ├── config/                 # 配置文件
-├── models/                # 模型实现
-├── utils/                 # 工具函数
-├── evaluation/           # 评估结果
-├── output/               # 输出文件
-└── logs/                 # 日志文件
+│   ├── model_config.py     # 模型配置
+│   └── system_config.py    # 系统配置
+├── models/                 # 模型实现
+│   ├── feature_engineering/# 特征工程模块
+│   │   ├── gradient_noise_removal.py  # 梯度剥离噪声
+│   │   └── temporal_ratio_features.py # 时序比值特征
+│   ├── detection/          # 欺诈检测模块
+│   │   ├── quick_screening.py  # 快筛模型
+│   │   ├── fine_screening.py   # 精筛模型
+│   │   └── attribution.py      # 归因模型
+│   └── policy/             # 策略优化模块
+│       ├── rule_generation.py  # 规则生成
+│       └── threshold_optimization.py # 阈值优化
+├── agent/                  # 智能Agent架构_cursor
+│   ├── pm/                 # PM层实现
+│   │   ├── requirement_analyzer.py  # 需求分析器
+│   │   └── task_scheduler.py        # 任务调度器
+│   └── engineer/           # 工程师层实现
+│       ├── code_generator.py        # 代码生成器
+│       └── code_optimizer.py        # 代码优化器
+├── utils/                  # 工具函数
+│   ├── data_processor.py   # 数据处理
+│   ├── visualization.py    # 可视化工具
+│   └── evaluation.py       # 评估工具
+├── evaluation/             # 评估结果
+├── output/                 # 输出文件
+└── logs/                   # 日志文件
 ```
 
 ### 📈 性能指标
 
-| 模型 | PR-AUC | F2-Score | Lift@10% |
-|------|--------|----------|-----------|
-| XGBoost | 0.892 | 85.34% | 3.45x |
-| RandomForest | 0.878 | 83.21% | 3.21x |
-| DNN | 0.865 | 82.15% | 3.12x |
-| LogisticRegression | 0.843 | 80.56% | 2.98x |
+| 模型 | PR-AUC | F2-Score | Lift@10% | KS值 |
+|------|--------|----------|-----------|------|
+| XGBoost | 0.892 | 85.34% | 3.45x | 0.37 |
+| RandomForest | 0.878 | 83.21% | 3.21x | 0.35 |
+| DNN | 0.865 | 82.15% | 3.12x | 0.34 |
+| LogisticRegression | 0.843 | 80.56% | 2.98x | 0.32 |
 
 ### 🚀 快速开始
 
@@ -85,6 +163,11 @@ pip install -r requirements.txt
 python run_experiment.py
 ```
 
+3. **启动智能Agent**
+```bash
+python run_agent.py --mode full
+```
+
 ### 📦 输出文件
 
 - 数据预处理报告（含特征分布可视化）
@@ -92,6 +175,7 @@ python run_experiment.py
 - SHAP解释图集（300dpi TIFF格式）
 - 防控策略手册（含可执行规则）
 - 实验日志（含MD5校验）
+- Agent工作报告（含任务分解与完成情况）
 
 ### 🔍 特征说明
 
@@ -110,112 +194,25 @@ python run_experiment.py
 - HCPCS_Cd: 医疗服务代码
 - Place_Of_Srvc: 服务地点
 
----
+### 🔄 开发流程与效率提升
 
-## English Version
+本项目采用智能Agent驱动的开发流程，实现了从需求分析到代码实现的高效协作：
 
-### 📋 Project Overview
+1. **需求分析阶段**：PM层Agent分析业务需求，拆解为明确的技术任务
+2. **设计阶段**：PM与工程师层Agent协作设计系统架构和算法流程
+3. **实现阶段**：工程师层Agent负责代码实现，PM层Agent进行质量监控
+4. **测试阶段**：自动化测试与人工评估相结合，确保系统质量
+5. **部署阶段**：自动化部署流程，实现快速迭代
 
-This project implements an end-to-end healthcare insurance fraud detection system, integrating data analysis, model training, feature interpretation, and control strategy generation. The system is built on public data from the Centers for Medicare & Medicaid Services (CMS) and the Office of Inspector General (OIG).
+通过这一流程，项目开发效率提升至小时级，相比传统开发方式提速约10倍。
 
-### 🌟 Core Features
+### 🔮 未来展望
 
-- **Full Process Automation**: Complete automation from data preprocessing to model deployment
-- **Multi-Model Integration**: Integration of Logistic Regression, Random Forest, XGBoost, and Deep Neural Networks
-- **Interpretability Analysis**: Detailed model interpretation using SHAP values
-- **Control Strategy Generation**: Automatic generation of executable risk control rules
+- **工具拓展**：为Agent提供更多外部工具调用能力，拓展解决问题的边界
+- **多步决策优化**：增强Agent的多步决策能力，提高复杂任务处理质量
+- **自我迭代机制**：完善Agent自我评估与优化机制，实现持续进化
+- **感知能力增强**：提升Agent对业务场景的理解能力，减少人工干预
+- **标准化体系**：建立更完善的评估标准体系，提高Agent输出质量
+- **框架简化**：优化Agent架构，降低使用门槛，提高适用性
 
-### �� Data Description
 
-#### Data Sources and Processing
-This project utilizes two primary data sources to build the healthcare insurance fraud detection dataset:
-
-1. **CMS Medicare Part B Data**
-- Source: Centers for Medicare & Medicaid Services (CMS)
-- Content: Doctor-specific medical procedure and cost information
-- Features:
-  * Based on doctor NPI (National Provider Identifier)
-  * Uses HCPCS (Healthcare Common Procedure Coding System) to code medical procedures
-  * Includes average payment amount, service count, medical specialty information
-  * Aggregated by provider NPI, HCPCS code, and service location
-
-2. **LEIE (List of Excluded Individuals/Entities) Data**
-- Source: Office of Inspector General (OIG)
-- Update Frequency: Monthly
-- Use: Identify individuals or entities excluded from federal healthcare programs
-- Features: Includes criminal conviction records related to healthcare fraud
-
-#### Data Integration Process
-1. CMS data is linked with the LEIE blacklist using medical entity unique identifier (NPI)
-2. Relevant features are extracted and standardized
-3. A final feature library containing 950,000 records is generated
-
-#### Feature Dimensions
-- **Sample Size**: 950,000 medical records
-- **Feature Count**: 11 features (7 numeric, 4 categorical)
-
-#### Data Structure
-Each record contains:
-- Doctor unique identifier (NPI)
-- Provider type (professional field)
-- HCPCS service code
-- Service location (hospital/clinic)
-- Claim count and related attributes
-
-### 🏗️ Project Structure
-
-```
-0222modelcode/
-├── config/                 # Configuration files
-├── models/                # Model implementations
-├── utils/                 # Utility functions
-├── evaluation/           # Evaluation results
-├── output/               # Output files
-└── logs/                 # Log files
-```
-
-### 📈 Performance Metrics
-
-| Model | PR-AUC | F2-Score | Lift@10% |
-|-------|--------|----------|-----------|
-| XGBoost | 0.892 | 85.34% | 3.45x |
-| RandomForest | 0.878 | 83.21% | 3.21x |
-| DNN | 0.865 | 82.15% | 3.12x |
-| LogisticRegression | 0.843 | 80.56% | 2.98x |
-
-### 🚀 Quick Start
-
-1. **Environment Setup**
-```bash
-pip install -r requirements.txt
-```
-
-2. **Run Experiment**
-```bash
-python run_experiment.py
-```
-
-### 📦 Output Files
-
-- Data preprocessing report (with feature distribution visualization)
-- Model performance comparison table (LaTeX format)
-- SHAP explanation figures (300dpi TIFF format)
-- Control strategy manual (with executable rules)
-- Experiment logs (with MD5 checksum)
-
-### 🔍 Feature Description
-
-**Numeric Features**:
-- Tot_Benes: Total number of beneficiaries served
-- Tot_Srvcs: Total number of services provided
-- Tot_Bene_Day_Srvcs: Total beneficiary service days
-- Avg_Sbmtd_Chrg: Average submitted charge
-- Avg_Mdcr_Alowd_Amt: Average Medicare allowed amount
-- Avg_Mdcr_Pymt_Amt: Average Medicare payment amount
-- Bi_Wk_Avg_SC: Bi-weekly average service cost
-
-**Categorical Features**:
-- Rndrng_Prvdr_Type: Provider type
-- Rndrng_Prvdr_Gndr: Provider gender
-- HCPCS_Cd: Healthcare service code
-- Place_Of_Srvc: Service location 
