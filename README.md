@@ -146,7 +146,7 @@ murphysystermmodelcode/
 
 | 模型 | PR-AUC | F2-Score | Lift@10% | KS值 |
 |------|--------|----------|-----------|------|
-| XGBoost | 0.892 | 85.34% | 3.45x | 0.37 |
+| XGBoost | 0.892 | 85.34% | 3.45x | 0.39 |
 | RandomForest | 0.878 | 83.21% | 3.21x | 0.35 |
 | DNN | 0.865 | 82.15% | 3.12x | 0.34 |
 | LogisticRegression | 0.843 | 80.56% | 2.98x | 0.32 |
